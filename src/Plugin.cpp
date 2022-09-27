@@ -109,8 +109,9 @@ void on_ref_lua_state_created(lua_State* l) try {
     d2d["line"] = [](float x1, float y1, float x2, float y2, float thickness, unsigned int color) {
         g_cmds->line(x1, y1, x2, y2, thickness, color);
     };
-    d2d["image"] = [](std::shared_ptr<D2DImage>& image, float x, float y, sol::object w_obj, sol::object h_obj) {
-        auto [w, h] = image->size();
+    d2d["image"] = [](std::shared_ptr<D2DImage>& image, float x, float y, sol::object w_obj, sol::object h_obj, sol::object opacity_obj) {
+        auto [w, h]  = image->size();
+        auto opacity = 1.0f;
 
         if (w_obj.is<float>()) {
             w = w_obj.as<float>();
@@ -120,7 +121,11 @@ void on_ref_lua_state_created(lua_State* l) try {
             h = h_obj.as<float>();
         }
 
-        g_cmds->image(image, x, y, w, h);
+        if (opacity_obj.is<float>()) {
+            opacity = opacity_object.as<float>();
+        }
+
+        g_cmds->image(image, x, y, w, h, opacity);
     };
     d2d["surface_size"] = [](sol::this_state s) {
         auto [w, h] = g_d2d->surface_size();
@@ -196,7 +201,7 @@ void on_ref_frame() try {
                 break;
 
             case DrawList::CommandType::IMAGE:
-                g_d2d->image(cmd.image_resource, cmd.image.x, cmd.image.y, cmd.image.w, cmd.image.h);
+                g_d2d->image(cmd.image_resource, cmd.image.x, cmd.image.y, cmd.image.w, cmd.image.h, cmd.image.opacity);
                 break;
             }
         }

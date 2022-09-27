@@ -48,6 +48,7 @@ public:
                 float y{};
                 float w{};
                 float h{};
+                float opacity{};
             } image;
         };
         std::string str{};
@@ -63,7 +64,7 @@ public:
         void fill_rect(float x, float y, float w, float h, unsigned int color);
         void outline_rect(float x, float y, float w, float h, float thickness, unsigned int color);
         void line(float x1, float y1, float x2, float y2, float thickness, unsigned int color);
-        void image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h);
+        void image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h, float opacity);
     };
 
     auto acquire() { return CommandLock{m_commands, std::scoped_lock{m_commands_mux}}; }

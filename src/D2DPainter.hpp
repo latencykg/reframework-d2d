@@ -29,7 +29,7 @@ public:
     void outline_rect(float x, float y, float w, float h, float thickness, unsigned int color);
     void line(float x1, float y1, float x2, float y2, float thickness, unsigned int color);
     void image(std::shared_ptr<D2DImage>& image, float x, float y);
-    void image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h);
+    void image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h, float opacity);
 
     auto surface_size() const { return std::make_tuple(m_rt_desc.Width, m_rt_desc.Height); }
 

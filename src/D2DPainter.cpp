@@ -87,6 +87,6 @@ void D2DPainter::image(std::shared_ptr<D2DImage>& image, float x, float y) {
     m_context->DrawBitmap(image->bitmap().Get(), {x, y, x + w, y + h});
 }
 
-void D2DPainter::image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h) {
-    m_context->DrawBitmap(image->bitmap().Get(), {x, y, x + w, y + h});
+void D2DPainter::image(std::shared_ptr<D2DImage>& image, float x, float y, float w, float h, float opacity) {
+    m_context->DrawBitmap(image->bitmap().Get(), {x, y, x + w, y + h}, opacity);
 }
