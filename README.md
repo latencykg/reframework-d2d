@@ -38,7 +38,8 @@ function()
     local img_w, img_h = image:size()
 
     -- Draw image at the bottom right corner of the screen in its default size.
-    d2d.image(image, screen_w - img_w, screen_h - img_h) 
+    d2d.image(image, screen_w - img_w, screen_h - img_h)
+    d2d.image(image, 0, 0, nil, nil, 0.5) 
 
     -- Draw image at the bottom left corner of the screen but scaled to 50x50.
     d2d.image(image, 0, screen_h - 50, 50, 50)
@@ -134,7 +135,7 @@ Draws a line between two points
 
 ---
 
-### `d2d.image(image, x, y, [w], [h])`
+### `d2d.image(image, x, y, [w], [h], [opacity])`
 Draws an image at the specified position, optionally scaled.
 
 #### Params
@@ -143,6 +144,7 @@ Draws an image at the specified position, optionally scaled.
 * `y` the vertical position on the screen
 * `w` the optional width to scale the image by
 * `h` the optional height to scale the image by
+* `opacity` the optional opacity for drawing
 
 #### Notes
 If the `w` and `h` parameters are omitted, the image will be drawn at its natural size.
